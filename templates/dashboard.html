@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inventory Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- 🔐 BLOCK PAGE IF NOT LOGGED IN -->
+    <script>
+        (async function () {
+            const res = await fetch("/login-check", {
+                credentials: "include"
+            });
+
+            if (res.status === 401) {
+                window.location.href = "/";
+            }
+        })();
+    </script>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="brand">
+            <i class="fa-solid fa-boxes-stacked"></i> Shop Inventory
+        </div>
+
+        <a href="/home">
+            <i class="fa-solid fa-house"></i> Home
+        </a>
+
+        <a href="/products-page">
+            <i class="fa-solid fa-list"></i> Products
+        </a>
+
+        <a href="/add-product-page">
+            <i class="fa-solid fa-circle-plus"></i> Add Product
+        </a>
+
+        <a href="/sell-page">
+            <i class="fa-solid fa-cart-shopping"></i> Sell
+        </a>
+
+        <a href="/restock-page">
+            <i class="fa-solid fa-arrow-rotate-right"></i> Restock
+        </a>
+
+        <a href="/dashboard-page" class="active">
+            <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+
+        <a href="#" onclick="toggleDarkMode()">
+            <i class="fa-solid fa-moon"></i> Dark Mode
+        </a>
+
+        <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <h2>Inventory Dashboard</h2>
+
+        <div class="dashboard-charts">
+            <div class="chart-box">
+                <canvas id="barChart"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-left">
+            © 2026 Shop Inventory System
+        </div>
+
+        <div class="footer-center">
+            Built with Flask · MongoDB · Chart.js
+        </div>
+
+        <div class="footer-right">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Support</a>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+    <script>
+        function logout() {
+            fetch("/logout", {
+                method: "POST",
+                credentials: "include"
+            }).then(() => {
+                window.location.href = "/";
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login - Shop Inventory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="login-page">
+
+    <div class="login-card">
+        <h2><i class="fa-solid fa-lock"></i> Login</h2>
+
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+
+        <button onclick="login()">Login</button>
+
+        <p>New user? <a href="/register-page">Register</a></p>
+    </div>
+
+    <script>
+        function login() {
+            fetch("/login", {
+                method: "POST",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: document.getElementById("username").value,
+                    password: document.getElementById("password").value
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message) {
+                        window.location.href = "/home";
+                    } else {
+                        alert(data.error);
+                    }
+                })
+                .catch(() => {
+                    alert("Server error. Please try again.");
+                });
+        }
+    </script>
+
+</body>
+
+</html>
