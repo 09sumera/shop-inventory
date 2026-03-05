@@ -19,12 +19,16 @@ h2 {
 /* ===== PAGE CONTAINER ===== */
 .container {
     max-width: 900px;
+    width: 95%;
+    /* added for responsiveness */
     margin: 40px auto 40px 260px;
     background: #ffffff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     animation: fadeIn 0.5s ease-in-out;
+    overflow-x: auto;
+    /* added for table scrolling */
 }
 
 /* ===== FORM INPUTS ===== */
@@ -85,13 +89,11 @@ table td {
     padding: 12px;
     text-align: center;
     border-bottom: 1px solid #2a2f4a;
-    /* Dark theme border */
 }
 
 /* Row Hover */
 table tbody tr:hover {
-    background-color: #1e2238;
-    /* Dark hover instead of light */
+    background-color: #f4f3ff;
 }
 
 /* ===== SIDEBAR ===== */
@@ -134,27 +136,22 @@ table tbody tr:hover {
     font-weight: 600;
 }
 
-/* ===== DASHBOARD CHARTS (BAR TOP, PIE BELOW) ===== */
+/* ===== DASHBOARD CHARTS ===== */
 .dashboard-charts {
     display: flex;
-    /* CHANGED */
     flex-direction: column;
-    /* STACK VERTICALLY */
     gap: 50px;
     margin-top: 30px;
 }
 
-/* Chart wrapper */
 .chart-box {
     width: 100%;
 }
 
-/* Bar chart bigger */
 #barChart {
     height: 420px !important;
 }
 
-/* Pie chart slightly smaller */
 #pieChart {
     height: 320px !important;
 }
@@ -183,6 +180,7 @@ body.dark table thead {
 
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
+
     .sidebar {
         position: relative;
         width: 100%;
@@ -198,8 +196,10 @@ body.dark table thead {
     }
 
     .container {
-        margin-left: 0;
+        margin-left: auto;
+        margin-right: auto;
         margin-top: 20px;
+        width: 95%;
     }
 
     #barChart {
@@ -270,14 +270,21 @@ body:not(.dark) .kpi-card p {
     color: #7c6ee6;
 }
 
-/* Mobile */
+/* Tablet */
 @media (max-width: 900px) {
     .kpi-cards {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-/* ===== INVENTORY HEALTH INDICATOR ===== */
+/* Phone */
+@media (max-width: 500px) {
+    .kpi-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== INVENTORY HEALTH ===== */
 .health-card {
     margin-top: 30px;
     padding: 20px;
@@ -303,7 +310,6 @@ body:not(.dark) .kpi-card p {
     font-size: 15px;
 }
 
-/* Status colors */
 .healthy {
     background: #dcfce7;
     color: #166534;
@@ -319,7 +325,6 @@ body:not(.dark) .kpi-card p {
     color: #991b1b;
 }
 
-/* Dark mode */
 body.dark .health-card {
     background: #1e293b;
 }
@@ -331,16 +336,13 @@ body.dark .health-card h3 {
 /* ===== FOOTER ===== */
 .footer {
     margin-left: 260px;
-    /* aligns with sidebar */
     margin-top: 50px;
     padding: 16px 30px;
     background-color: #f8fafc;
     border-top: 1px solid #e5e7eb;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     font-size: 14px;
     color: #475569;
 }
@@ -356,7 +358,6 @@ body.dark .health-card h3 {
     text-decoration: underline;
 }
 
-/* DARK MODE FOOTER */
 body.dark .footer {
     background-color: #020617;
     border-top: 1px solid #1e293b;
@@ -367,7 +368,6 @@ body.dark .footer a {
     color: #a5b4fc;
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
     .footer {
         margin-left: 0;
@@ -381,30 +381,21 @@ body.dark .footer a {
     }
 }
 
-/* Row Hover - Light Mode Only */
+/* TABLE HOVER */
 body:not(.dark) table tbody tr:hover {
     background-color: #f4f3ff;
 }
 
-/* Row Hover - Dark Mode */
 body.dark table tbody tr:hover {
     background-color: #1e293b;
 }
 
-/* Active / clicked row */
-body.dark table tr:active,
-body.dark table tr:focus,
-body.dark table tr:focus-within {
-    background-color: #1e293b !important;
-}
-
-/* Ensure text stays visible */
 body.dark table td,
 body.dark table th {
     color: #e5e7eb;
 }
 
-/* ================= LOGIN PAGE ================= */
+/* ===== LOGIN PAGE ===== */
 
 .login-page {
     background: linear-gradient(135deg, #0b1120, #111827);
@@ -415,7 +406,6 @@ body.dark table th {
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* Login Card */
 .login-card {
     background: rgba(30, 41, 59, 0.9);
     padding: 40px;
@@ -426,14 +416,12 @@ body.dark table th {
     text-align: center;
 }
 
-/* Title */
 .login-card h2 {
     color: #ffffff;
     margin-bottom: 25px;
     font-size: 24px;
 }
 
-/* Input Fields */
 .login-card input {
     width: 100%;
     padding: 12px;
@@ -450,7 +438,6 @@ body.dark table th {
     color: #9ca3af;
 }
 
-/* Button */
 .login-card button {
     width: 100%;
     padding: 12px;
@@ -469,7 +456,6 @@ body.dark table th {
     box-shadow: 0 5px 20px rgba(124, 110, 230, 0.6);
 }
 
-/* Register link */
 .login-card p {
     margin-top: 15px;
     font-size: 13px;
@@ -484,4 +470,52 @@ body.dark table th {
 
 .login-card a:hover {
     text-decoration: underline;
+}
+
+/* ================= MOBILE SIDEBAR ================= */
+
+.mobile-topbar {
+    display: none;
+}
+
+@media (max-width:768px) {
+
+    .mobile-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #111827;
+        color: white;
+        padding: 12px 16px;
+        position: sticky;
+        top: 0;
+        z-index: 2000;
+    }
+
+    .mobile-title {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .menu-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -240px;
+        top: 0;
+        width: 230px;
+        height: 100vh;
+        transition: 0.3s;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
 }

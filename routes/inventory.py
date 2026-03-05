@@ -28,6 +28,13 @@ def add_product():
             return jsonify({"error": error}), 400
 
         products = products_collection()
+
+        # 🔹 Check duplicate product name
+        existing_name = products.find_one({"name": product.name})
+        if existing_name:
+            return jsonify({"error": "Product with this name already exists"}), 400
+
+        # 🔹 Existing ID → update quantity
         existing = products.find_one({"id": product.id})
 
         if existing:
@@ -42,7 +49,6 @@ def add_product():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 # ---------------- GET ALL PRODUCTS ----------------
 @inventory_bp.route("/products", methods=["GET"])

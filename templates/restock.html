@@ -3,25 +3,37 @@
 
 <head>
     <title>Restock Product</title>
+
+    <!-- MOBILE RESPONSIVE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
-<!-- 🔐 BLOCK PAGE IF NOT LOGGED IN -->
-<script>
-(async function () {
-    const res = await fetch("/login-check", {
-        credentials: "include"
-    });
+    <!-- 🔐 BLOCK PAGE IF NOT LOGGED IN -->
+    <script>
+        (async function () {
+            const res = await fetch("/login-check", {
+                credentials: "include"
+            });
 
-    if (res.status === 401) {
-        window.location.href = "/";
-    }
-})();
-</script>
+            if (res.status === 401) {
+                window.location.href = "/";
+            }
+        })();
+    </script>
+
+    <!-- MOBILE TOPBAR -->
+    <div class="mobile-topbar">
+        <button onclick="toggleSidebar()" class="menu-btn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <span class="mobile-title">Shop Inventory</span>
+    </div>
 
     <!-- SIDEBAR -->
     <div class="sidebar">
@@ -108,14 +120,14 @@
                     qty: Number(document.getElementById("qty").value)
                 })
             })
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById("msg").innerText =
-                    data.message || data.error || "Something went wrong";
-            })
-            .catch(() => {
-                document.getElementById("msg").innerText = "Server error";
-            });
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("msg").innerText =
+                        data.message || data.error || "Something went wrong";
+                })
+                .catch(() => {
+                    document.getElementById("msg").innerText = "Server error";
+                });
         }
 
         function logout() {
@@ -129,4 +141,5 @@
     </script>
 
 </body>
+
 </html>
